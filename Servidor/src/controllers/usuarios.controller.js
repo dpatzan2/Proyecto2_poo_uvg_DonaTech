@@ -1,6 +1,6 @@
 const Usuario = require('../models/usuarios.model');
 
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const jwt = require('../services/jwt');
 
 async function Registrar(req, res) {
@@ -44,7 +44,7 @@ async function Registrar(req, res) {
 async function Login(req, res) {
     try {
         const parametros = req.body;
-        const usuarioEncontrado = await Usuario.findOne({ email: parametros.email });
+        const usuarioEncontrado = await Usuario.findOne({ usuario: parametros.usuario });
 
         if (!usuarioEncontrado) {
             return res.status(500).send({ mensaje: 'Error, el correo no se encuentra registrado.' });
@@ -90,9 +90,34 @@ async function EditarUsuario(req, res) {
     }
 }
 
+async function registarAdminDefecto(req, res) {
+    var usuarioModelo = new Usuario();
+    usuarioModelo.nombre = 'SuperAdmin';
+    usuarioModelo.usuario = 'SuperAdmin';
+    usuarioModelo.rol = 'ROL_ADMINISTRADOR';
+    
+    try {
+        const usuarioGuardado = await Usuario.findOne({ nombre: 'SuperAdmin' });
+
+        if (!usuarioGuardado) {
+            const passwordEncrypt = await bcrypt.hash('123456', 10, null);
+            usuarioModelo.password = passwordEncrypt;
+            await usuarioModelo.save();
+            console.log('Usuario administrador creado');
+        } else {
+            console.log('El usuario administrador ya existe');
+        }
+    } catch (err) {
+        console.error('Error al registrar usuario administrador:', err);
+    }
+}
+
+  
+
 
 module.exports = {
     Registrar,
     Login,
     EditarUsuario,
+    registarAdminDefecto
 }
