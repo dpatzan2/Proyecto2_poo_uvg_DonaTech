@@ -1,8 +1,16 @@
 const Donaciones = require('../models/donaciones.model');
 
-const ConsultarDonaciones = (req, res) => {
+const ConsultarDonaciones = async (req, res) => {
+    try {
+ 
+        const donaciones = await Donaciones.find();
 
-}
+        return res.status(200).json({ donaciones });
+    } catch (error) {
+        return res.status(500).json({ mensaje: 'Error en la petición' });
+    }
+};
+
 
 const CrearDonacion = (req, res) => {
 
