@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var donacionesSchema = Schema({
-    Monto: Number,
+    Descripcion: String,
     FechaDonacion: Date,
     idDonante: {type: Schema.Types.ObjectId, ref: "usuarios"},
     idBeneficiario: {type: Schema.Types.ObjectId, ref: "usuarios"},
