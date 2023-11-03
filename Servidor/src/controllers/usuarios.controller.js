@@ -22,7 +22,6 @@ async function Registrar(req, res) {
                     totalCarrito: 0,
                     password: passwordEncriptada,
                 });
-
                 const usuarioGuardado = await usuarioModel.save();
 
                 if (!usuarioGuardado) {
