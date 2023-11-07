@@ -7,8 +7,8 @@ async function Registrar(req, res) {
     try {
         const parametros = req.body;
 
-        if (parametros.nombre && parametros.apellido && parametros.email && parametros.password) {
-            const usuarioEncontrado = await Usuario.find({ email: parametros.email });
+        if (parametros.nombre && parametros.apellido && parametros.usuario && parametros.password) {
+            const usuarioEncontrado = await Usuario.find({ usuario: parametros.usuario });
 
             if (usuarioEncontrado.length === 0) {
                 const passwordEncriptada = await bcrypt.hash(parametros.password, 10); // Use an appropriate number of rounds for hashing.
@@ -16,10 +16,8 @@ async function Registrar(req, res) {
                 const usuarioModel = new Usuario({
                     nombre: parametros.nombre,
                     apellido: parametros.apellido,
-                    email: parametros.email,
-                    rol: 'USUARIO',
-                    imagen: null,
-                    totalCarrito: 0,
+                    usuario: parametros.usuario,
+                    rol: parametros.rol,
                     password: passwordEncriptada,
                 });
                 const usuarioGuardado = await usuarioModel.save();
