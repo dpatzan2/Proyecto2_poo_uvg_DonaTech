@@ -21,7 +21,6 @@ const ConsultarDonaciones = async (req, res) => {
 const CrearDonacion = async (req, res) => {
     try{
         const parametros = req.body;
-
         if (parametros.Descripcion && parametros.FechaDonacion && parametros.idDonante && parametros.idBeneficiario && parametros.Estado){
             const donacionModel = new Donaciones({
                 Descripcion: parametros.Descripcion,
@@ -30,12 +29,13 @@ const CrearDonacion = async (req, res) => {
                 idBeneficiario: parametros.idBeneficiario,
                 Estado: parametros.Estado,
             });
+  
 
             const donacionGuardada = await donacionModel.save();
-
             if (!donacionGuardada){
                 return res.status(500).send({mensaje: 'Error al agregar donacion'});
             }
+            return res.status(200).send({mensaje: "Donacion guardada exitosamente"})
         } else {
             return res.status(500).send({ mensaje: 'Faltan datos obligatorios'});
         }
