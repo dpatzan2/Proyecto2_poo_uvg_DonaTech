@@ -31,17 +31,19 @@ function App() {
                 <span className="h1 fw-bold mb-0">Donatech</span>
               </div>
 
-              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign into your account</h5>
+              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Ingresa tus credenciales</h5>
 
-                <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-                <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+                <MDBInput wrapperClass='mb-4' label='Usuario' id='formControlLg' type='email' size="lg"/>
+                <MDBInput wrapperClass='mb-4' label='Contraseña' id='formControlLg' type='password' size="lg"/>
 
-              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>Login</MDBBtn>
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>No tienes cuenta aun? <a href="./Register.jsx!" style={{color: '#393f81'}}>Register here</a></p>
+              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>Ingresar</MDBBtn>
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>No tienes cuenta aun? <a href="./Register.jsx!" style={{color: '#393f81'}}>Registrate aqui</a></p>
 
               <div className='d-flex flex-row justify-content-start'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
+                <a className="small text-muted me-1">DonaTech es una aplicación que facilita y organiza las donaciones de cualquier tipo a personas necesitadas. 
+                Conecta donantes con receptores de manera eficiente, asegurando transparencia y seguridad en el proceso. Los usuarios pueden buscar donaciones, 
+                comunicarse de manera segura y realizar donaciones de dinero, artículos, servicios o tiempo. DonaTech fomenta la solidaridad y la comunidad, 
+                haciendo que la ayuda sea más accesible y efectiva.</a>
               </div>
 
             </MDBCardBody>
