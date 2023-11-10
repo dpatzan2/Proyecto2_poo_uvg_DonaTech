@@ -1,9 +1,6 @@
 const Donaciones = require('../models/donaciones.model');
 
 
-const bcrypt = require('bcrypt-nodejs');
-const jwt = require('../services/jwt');
-
 
 
 const ConsultarDonaciones = async (req, res) => {
