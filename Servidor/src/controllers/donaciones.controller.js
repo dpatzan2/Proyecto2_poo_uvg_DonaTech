@@ -46,10 +46,10 @@ async function EditarDonacion(req, res) {
         const idDon = req.params.idDon;
         const params = req.body;
 
-        const donacionExist = await Donaciones.findOne({_id: idDon});
+        const donacionExist = await Donaciones.findOne({id: idDon});
         if (!donacionExist) return res.status(400).send({mensaje: 'Donacion no encontrada'});
 
-        const donaUpdate = await Donaciones.findOneAndUpdate({_id: idDon}, params, {new: true});
+        const donaUpdate = await Donaciones.findOneAndUpdate({id: idDon}, params, {new: true});
         if (donaUpdate) return res.send({mensaje: 'Donacion actualizada', donaUpdate});
         return res.status(400).send({mensaje: 'Donacion no actualizada'});
 
@@ -63,7 +63,7 @@ async function EliminarDonacion(req, res){
     try{
 
         const idDon = req.params.id;
-        const elimiDon = await Donaciones.findOneAndDelete({_id: idDon});
+        const elimiDon = await Donaciones.findOneAndDelete({id: idDon});
         if (elimiDon) return res.send({mensaje: 'Donacion eliminada', elimiDon});
         return res.status(400).send({mensaje: 'Donacion no encontrada'});
 
@@ -77,7 +77,7 @@ async function ConsultarDonacionesById(req, res){
     try{
 
         const idDon = req.params.id;
-        const donaExist = await Donaciones.findOne({_id: idDon});
+        const donaExist = await Donaciones.findOne({id: idDon});
         return res.send({mensaje: 'Donacion: ', donaExist});
 
     } catch(error) {
