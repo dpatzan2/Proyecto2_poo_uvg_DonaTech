@@ -44,15 +44,48 @@ const CrearDonacion = async (req, res) => {
     }
 }
 
-const EditarDonacion = (req, res) => {
+async function EditarDonacion(req, res) {
+    try{
+        const idDon = req.params.idDon;
+        const params = req.body;
+
+        const donacionExist = await Donaciones.findOne({_id: idDon});
+        if (!donacionExist) return res.status(400).send({mensaje: 'Donacion no encontrada'});
+
+        const donaUpdate = await Donaciones.findOneAndUpdate({_id: idDon}, params, {new: true});
+        if (donaUpdate) return res.send({mensaje: 'Donacion actualizada', donaUpdate});
+        return res.status(400).send({mensaje: 'Donacion no actualizada'});
+
+    }catch(error){
+        return res.status(500).send({mensaje: 'Error en la peticion'});
+    }
 
 }
 
-const EliminarDonacion = (req, res) => {
+async function EliminarDonacion(req, res){
+    try{
+
+        const idDon = req.params.id;
+        const elimiDon = await Donaciones.findOneAndDelete({_id: idDon});
+        if (elimiDon) return res.send({mensaje: 'Donacion eliminada', elimiDon});
+        return res.status(400).send({mensaje: 'Donacion no encontrada'});
+
+    } catch(error) {
+        return res.status(500).send({mensaje: 'Error en la peticion'})
+    }
 
 }
 
-const ConsultarDonacionesById = (req, res) => {
+async function ConsultarDonacionesById(req, res){
+    try{
+
+        const idDon = req.params.id;
+        const donaExist = await Donaciones.findOne({_id: idDon});
+        return res.send({mensaje: 'Donacion: ', donaExist});
+
+    } catch(error) {
+        return res.status(500).send({mensaje: 'Error obteniendo donacion'})
+    }
 
 }
 
